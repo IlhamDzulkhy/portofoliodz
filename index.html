@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ilham Dzulkhy — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a0f;
+      --bg2: #111118;
+      --bg3: #17171f;
+      --card: #1c1c26;
+      --border: rgba(255,255,255,0.07);
+      --border2: rgba(255,255,255,0.12);
+      --text: #f0eef8;
+      --muted: #9896aa;
+      --accent: #7c6dfa;
+      --accent2: #a98cf8;
+      --accent-glow: rgba(124,109,250,0.15);
+      --teal: #2dd4a8;
+      --teal-dim: rgba(45,212,168,0.12);
+      --amber: #f5a623;
+      --amber-dim: rgba(245,166,35,0.1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(10,10,15,0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      height: 60px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--muted); font-size: 0.875rem; text-decoration: none;
+      transition: color 0.2s; letter-spacing: 0.02em;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta {
+      background: var(--accent); color: #fff;
+      padding: 0.45rem 1.1rem; border-radius: 6px;
+      font-size: 0.8rem; font-weight: 500; text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .nav-cta:hover { opacity: 0.85; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .hamburger span { width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: 0.3s; }
+    .mobile-menu {
+      display: none; position: fixed; top: 60px; left: 0; right: 0; z-index: 99;
+      background: rgba(10,10,15,0.97); backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      flex-direction: column; padding: 1.5rem 2rem; gap: 1.25rem;
+    }
+    .mobile-menu a { color: var(--muted); text-decoration: none; font-size: 1rem; }
+    .mobile-menu.open { display: flex; }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 80px 2rem 0;
+      position: relative; overflow: hidden;
+    }
+    .hero-glow {
+      position: absolute; top: -200px; left: -200px;
+      width: 700px; height: 700px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(124,109,250,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-glow2 {
+      position: absolute; bottom: -100px; right: -100px;
+      width: 500px; height: 500px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(45,212,168,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-inner {
+      max-width: 1100px; margin: 0 auto; width: 100%;
+      display: grid; grid-template-columns: 1fr 380px; gap: 4rem; align-items: center;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--accent-glow); border: 1px solid rgba(124,109,250,0.25);
+      border-radius: 100px; padding: 5px 14px;
+      font-size: 0.78rem; color: var(--accent2); margin-bottom: 1.5rem;
+    }
+    .hero-badge::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--teal); box-shadow: 0 0 6px var(--teal);
+    }
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 800; line-height: 1.05;
+      letter-spacing: -0.03em; margin-bottom: 1.25rem;
+    }
+    h1 .accent { color: var(--accent); }
+    h1 .accent2 { color: var(--teal); }
+    .hero-desc {
+      color: var(--muted); font-size: 1.05rem; line-height: 1.75;
+      margin-bottom: 2rem; max-width: 540px;
+    }
+    .hero-tags {
+      display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 2.5rem;
+    }
+    .tag {
+      background: var(--bg3); border: 1px solid var(--border2);
+      border-radius: 6px; padding: 5px 12px;
+      font-size: 0.78rem; color: var(--muted);
+    }
+    .tag.active { border-color: rgba(124,109,250,0.4); color: var(--accent2); background: var(--accent-glow); }
+    .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--accent); color: #fff; padding: 0.75rem 1.75rem;
+      border-radius: 8px; text-decoration: none; font-size: 0.9rem;
+      font-weight: 500; transition: opacity 0.2s, transform 0.2s;
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+    .btn-outline {
+      border: 1px solid var(--border2); color: var(--text);
+      padding: 0.75rem 1.75rem; border-radius: 8px;
+      text-decoration: none; font-size: 0.9rem; font-weight: 500;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--accent); transform: translateY(-1px); }
+    .hero-photo {
+      position: relative; display: flex; justify-content: center;
+    }
+    .hero-photo img {
+      width: 300px; height: 300px; object-fit: cover;
+      border-radius: 24px; border: 2px solid var(--border2);
+      position: relative; z-index: 1;
+    }
+    .hero-photo::before {
+      content: ''; position: absolute; inset: -12px;
+      border-radius: 30px; z-index: 0;
+      background: linear-gradient(135deg, rgba(124,109,250,0.2), rgba(45,212,168,0.1));
+    }
+    .hero-photo .float-tag {
+      position: absolute; bottom: -16px; left: -16px; z-index: 2;
+      background: var(--card); border: 1px solid var(--border2);
+      border-radius: 12px; padding: 10px 16px;
+      font-size: 0.8rem;
+    }
+    .float-tag .ft-label { color: var(--muted); font-size: 0.7rem; }
+    .float-tag .ft-val { color: var(--text); font-weight: 500; margin-top: 2px; }
+
+    /* SECTION COMMON */
+    section { padding: 5rem 2rem; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.75rem; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--accent);
+      font-weight: 500; margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.6rem, 3vw, 2.25rem);
+      font-weight: 700; letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+    .section-desc { color: var(--muted); font-size: 1rem; line-height: 1.7; max-width: 600px; }
+    .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+
+    /* ABOUT */
+    #about { background: var(--bg2); }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start;
+    }
+    .about-left {}
+    .about-body {
+      color: var(--muted); line-height: 1.85; font-size: 0.975rem; margin-top: 1.5rem;
+    }
+    .about-body p { margin-bottom: 1rem; }
+    .about-body em {
+      display: block; color: var(--text); font-style: italic;
+      border-left: 2px solid var(--accent); padding-left: 1rem;
+      font-size: 0.9rem; line-height: 1.65; margin-top: 0.5rem;
+    }
+    .focus-cards { display: flex; flex-direction: column; gap: 12px; margin-top: 2rem; }
+    .focus-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.1rem 1.25rem;
+      display: flex; align-items: flex-start; gap: 14px;
+      transition: border-color 0.2s;
+    }
+    .focus-card:hover { border-color: var(--border2); }
+    .focus-icon {
+      width: 36px; height: 36px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; flex-shrink: 0;
+    }
+    .fi-purple { background: var(--accent-glow); color: var(--accent2); }
+    .fi-teal { background: var(--teal-dim); color: var(--teal); }
+    .fi-amber { background: var(--amber-dim); color: var(--amber); }
+    .fi-blue { background: rgba(96,165,250,0.1); color: #60a5fa; }
+    .focus-info .fc-title { font-weight: 500; font-size: 0.9rem; }
+    .focus-info .fc-desc { color: var(--muted); font-size: 0.8rem; margin-top: 2px; }
+
+    /* EXPERIENCE */
+    #experience {}
+    .exp-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; }
+    .exp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+    .exp-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 16px; padding: 1.5rem;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+    .exp-card:hover { border-color: var(--border2); transform: translateY(-3px); }
+    .exp-card-badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 0.7rem; padding: 3px 10px; border-radius: 100px;
+      margin-bottom: 1rem; font-weight: 500;
+    }
+    .badge-purple { background: var(--accent-glow); color: var(--accent2); border: 1px solid rgba(124,109,250,0.2); }
+    .badge-teal { background: var(--teal-dim); color: var(--teal); border: 1px solid rgba(45,212,168,0.2); }
+    .badge-amber { background: var(--amber-dim); color: var(--amber); border: 1px solid rgba(245,166,35,0.2); }
+    .exp-card h3 { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; margin-bottom: 0.6rem; }
+    .exp-card p { color: var(--muted); font-size: 0.875rem; line-height: 1.7; }
+    .exp-card ul { color: var(--muted); font-size: 0.875rem; line-height: 1.75; padding-left: 1.1rem; }
+    .exp-card ul li { margin-bottom: 0.35rem; }
+
+    /* SUMMARY / PROFILE */
+    #summary { background: var(--bg2); }
+    .summary-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px;
+      margin-top: 3rem;
+    }
+    .summary-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 16px; overflow: hidden;
+      transition: border-color 0.25s, transform 0.25s;
+      cursor: default;
+    }
+    .summary-card:hover { border-color: var(--border2); transform: translateY(-4px); }
+    .sc-img {
+      width: 100%; height: 160px; object-fit: cover;
+      display: block; filter: brightness(0.7);
+    }
+    .sc-body { padding: 1.25rem; }
+    .sc-body h3 { font-family: 'Syne', sans-serif; font-size: 0.95rem; font-weight: 700; margin-bottom: 4px; }
+    .sc-body .sc-sub { color: var(--muted); font-size: 0.8rem; }
+
+    /* CONTACT */
+    #contact {}
+    .contact-inner {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 20px; padding: 3rem;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;
+    }
+    .contact-left h2 { font-family: 'Syne', sans-serif; font-size: 1.75rem; font-weight: 700; margin-bottom: 0.75rem; letter-spacing: -0.02em; }
+    .contact-left p { color: var(--muted); line-height: 1.7; font-size: 0.9rem; }
+    .contact-links { display: flex; flex-direction: column; gap: 12px; margin-top: 2rem; }
+    .contact-link {
+      display: flex; align-items: center; gap: 12px;
+      background: var(--bg3); border: 1px solid var(--border);
+      border-radius: 10px; padding: 0.9rem 1.1rem;
+      text-decoration: none; color: var(--text);
+      transition: border-color 0.2s;
+    }
+    .contact-link:hover { border-color: var(--accent); }
+    .cl-icon {
+      width: 34px; height: 34px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; flex-shrink: 0;
+    }
+    .cl-label { font-size: 0.7rem; color: var(--muted); }
+    .cl-val { font-size: 0.88rem; font-weight: 500; }
+    .contact-right {}
+    .contact-right h3 { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 1.25rem; }
+    .tech-stack { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 2rem; }
+    .tech-tag {
+      background: var(--bg3); border: 1px solid var(--border2);
+      border-radius: 6px; padding: 5px 12px;
+      font-size: 0.78rem; color: var(--muted);
+    }
+    .stat-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .stat-box {
+      background: var(--bg3); border: 1px solid var(--border);
+      border-radius: 10px; padding: 1rem;
+    }
+    .stat-num { font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 800; color: var(--accent2); }
+    .stat-lbl { color: var(--muted); font-size: 0.78rem; margin-top: 2px; }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 1.5rem 2rem;
+      text-align: center; color: var(--muted); font-size: 0.8rem;
+    }
+
+    /* SCROLL ANIMATIONS */
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .hero-photo { order: -1; }
+      .hero-photo img { width: 220px; height: 220px; }
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .contact-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+    }
+    @media (max-width: 600px) {
+      nav { padding: 0 1rem; }
+      section { padding: 3.5rem 1.25rem; }
+      .contact-inner { padding: 1.75rem; }
+      .hero { padding: 70px 1.25rem 0; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#home" class="nav-logo">ilham<span>.</span>dzulkhy</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#summary">Profile</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="mailto:dzulkhyilham@gmail.com" class="nav-cta">Say Hello ↗</a>
+  <div class="hamburger" onclick="document.querySelector('.mobile-menu').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+<div class="mobile-menu">
+  <a href="#about" onclick="this.closest('.mobile-menu').classList.remove('open')">About</a>
+  <a href="#experience" onclick="this.closest('.mobile-menu').classList.remove('open')">Experience</a>
+  <a href="#summary" onclick="this.closest('.mobile-menu').classList.remove('open')">Profile</a>
+  <a href="#contact" onclick="this.closest('.mobile-menu').classList.remove('open')">Contact</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-inner">
+    <div class="hero-left fade-in">
+      <div class="hero-badge">Undergraduate Smart City Information System</div>
+      <h1>
+        Ilham<br>
+        <span class="accent">Dzulkhy</span>
+      </h1>
+      <p class="hero-desc">
+        Mahasiswa S1 Sistem Informasi Terapan Kota Cerdas di Telkom University.
+        Membangun fondasi ekosistem digital masa depan melalui <strong style="color:var(--text)">Web Development</strong>, <strong style="color:var(--text)">Blockchain</strong>, dan eksplorasi <strong style="color:var(--text)">Kecerdasan Buatan (AI)</strong>.
+      </p>
+      <div class="hero-tags">
+        <span class="tag active">Web Developer</span>
+        <span class="tag active">Blockchain Apprentice</span>
+        <span class="tag active">AI Explorer</span>
+        <span class="tag">Student Ambassador</span>
+        <span class="tag">Smart City</span>
+        <span class="tag">Telkom University</span>
+      </div>
+      <div class="hero-ctas">
+        <a href="#experience" class="btn-primary">View Experience ↓</a>
+        <a href="#contact" class="btn-outline">Get In Touch</a>
+      </div>
+    </div>
+    <div class="hero-photo fade-in">
+      <img src="https://ilhamdzulkhy.my.id/images/profil.jpeg" alt="Foto Profil Ilham Dzulkhy" />
+      <div class="float-tag">
+        <div class="ft-label">Status</div>
+        <div class="ft-val">🟢 Open to Opportunities</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-left fade-in">
+        <div class="section-label">About Me</div>
+        <h2 class="section-title">Tentang Saya</h2>
+        <div class="about-body">
+          <p>
+            Mahasiswa S1 Sistem Informasi Terapan Kota Cerdas di Telkom University. Memiliki minat tinggi terhadap Web Development, teknologi Blockchain, dan eksplorasi Kecerdasan Buatan (AI).
+          </p>
+          <p>
+            Memiliki latar belakang dalam organisasi, kepemimpinan, komunikasi, kompetisi, dan riset IT yang membentuk keahlian dalam kepemimpinan, manajemen operasional, dan kemampuan teknis di bidang IT. Sangat tertarik pada pengembangan solusi digital untuk Smart City dan terus mendalami ekosistem teknologi terbaru untuk membangun karier yang berdampak di industri IT.
+          </p>
+          <em>
+            "A student of the Undergraduate Smart City Information System program at Telkom University. Highly interested in Web Development, Blockchain technology, and Artificial Intelligence (AI) exploration. Possessing a background in organization, leadership, communication, competitions, and IT research."
+          </em>
+        </div>
+        <div style="margin-top: 2rem;">
+          <img src="https://ilhamdzulkhy.my.id/images/foto-about.jpeg" alt="About Ilham" style="width:100%; border-radius: 16px; border: 1px solid var(--border2);" />
+        </div>
+      </div>
+      <div class="about-right fade-in">
+        <div class="section-label">Current Focus</div>
+        <h2 class="section-title">Fokus Saat Ini</h2>
+        <p class="section-desc">
+          Berbekal minat yang tinggi pada teknologi desentralisasi dan otomasi, saya aktif membangun fondasi ekosistem masa depan.
+        </p>
+        <div class="focus-cards">
+          <div class="focus-card">
+            <div class="focus-icon fi-blue">🎓</div>
+            <div class="focus-info">
+              <div class="fc-title">Student Ambassador</div>
+              <div class="fc-desc">Mewakili kampus & teknologi terbaru</div>
+            </div>
+          </div>
+          <div class="focus-card">
+            <div class="focus-icon fi-purple">💻</div>
+            <div class="focus-info">
+              <div class="fc-title">Web Developer</div>
+              <div class="fc-desc">Membangun & mengembangkan keahlian Web Development</div>
+            </div>
+          </div>
+          <div class="focus-card">
+            <div class="focus-icon fi-amber">⛓️</div>
+            <div class="focus-info">
+              <div class="fc-title">Blockchain Apprentice</div>
+              <div class="fc-desc">Penciptaan aset kripto di jaringan Solana</div>
+            </div>
+          </div>
+          <div class="focus-card">
+            <div class="focus-icon fi-teal">🤖</div>
+            <div class="focus-info">
+              <div class="fc-title">AI Explorer</div>
+              <div class="fc-desc">Eksplorasi potensi implementasi Kecerdasan Buatan</div>
+            </div>
+          </div>
+        </div>
+        <p style="color: var(--muted); font-size: 0.85rem; line-height: 1.7; margin-top: 1.5rem;">
+          <em style="font-style: normal;">"Driven by a strong passion for decentralized technologies and automation, I actively build the foundations of future ecosystems. My routine encompasses web development, learning Blockchain, and the continuous exploration of Artificial Intelligence (AI) implementations."</em>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="container">
+    <div class="section-label">Experience & Projects</div>
+    <h2 class="section-title">Pengalaman &amp; Proyek</h2>
+    <p class="section-desc" style="margin-bottom: 3rem;">Pengalaman dan proyek yang sedang berjalan — <em style="font-style:normal;color:var(--text)">Experience and ongoing projects</em></p>
+    <div class="exp-grid">
+      <div class="exp-card fade-in">
+        <div class="exp-card-badge badge-purple">🏛️ Leadership & Management</div>
+        <h3>Kepemimpinan &amp; Manajemen</h3>
+        <ul>
+          <li>Mengikuti berbagai organisasi sekolah dan masyarakat</li>
+          <li>Menjadi ketua pelaksana berbagai acara hingga tingkat kabupaten</li>
+          <li>Berbekal pengalaman membangun komunikasi dan koordinasi tim yang efektif</li>
+        </ul>
+        <div style="margin-top: 0.75rem; font-size: 0.78rem; color: var(--muted); font-style: italic;">
+          Participating in various school and community organizations, as well as chairing multiple events up to the regency level.
+        </div>
+      </div>
+      <div class="exp-card fade-in">
+        <div class="exp-card-badge badge-teal">🏆 Achievements & Business</div>
+        <h3>Prestasi &amp; Pengalaman Bisnis</h3>
+        <ul>
+          <li>Memenangkan beberapa kompetisi sains di tingkat nasional</li>
+          <li>Penerima beasiswa Telkom University</li>
+          <li>Pembuatan aplikasi presensi digital</li>
+          <li>Pengelolaan bisnis digital: penjualan akun game, jasa media sosial, dan <em>faceless content creation</em></li>
+        </ul>
+        <div style="margin-top: 0.75rem; font-size: 0.78rem; color: var(--muted); font-style: italic;">
+          Won science competitions nationally, scholarship recipient, and managing digital business operations.
+        </div>
+      </div>
+      <div class="exp-card fade-in">
+        <div class="exp-card-badge badge-amber">⚙️ Technical Projects</div>
+        <h3>Proyek Teknis Saat Ini</h3>
+        <ul>
+          <li>Pengembangan web pribadi & pendalaman Web Development</li>
+          <li>Eksplorasi AI dan implementasinya</li>
+          <li>Penciptaan aset kripto di jaringan <strong style="color:var(--text)">Solana</strong></li>
+          <li>Pelatihan keamanan siber di <a href="https://www.hackthebox.com/" target="_blank" style="color: var(--accent2); text-decoration: none;">Hack The Box ↗</a></li>
+        </ul>
+        <div style="margin-top: 0.75rem; font-size: 0.78rem; color: var(--muted); font-style: italic;">
+          Personal web portfolio, AI exploration, Solana crypto assets, and cybersecurity training.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- PROFILE SUMMARY -->
+<section id="summary">
+  <div class="container">
+    <div class="section-label">Profile Summary</div>
+    <h2 class="section-title">Ringkasan Profil</h2>
+    <p class="section-desc">Ringkasan mengenai organisasi, prestasi, proyek, dan pengalaman saya — <em style="font-style:normal;color:var(--text)">A summary of my organizations, achievements, projects, and experiences.</em></p>
+    <div class="summary-grid" style="margin-top: 2.5rem;">
+      <div class="summary-card fade-in">
+        <img src="https://ilhamdzulkhy.my.id/images/pic04.jpg" alt="Organisasi" class="sc-img" />
+        <div class="sc-body">
+          <h3>Organisasi</h3>
+          <div class="sc-sub" style="margin-bottom: 0.75rem;">Organizations and committees participated in.</div>
+          <p style="color: var(--muted); font-size: 0.82rem; line-height: 1.65;">Keterlibatan aktif dalam berbagai organisasi sekolah dan masyarakat, membentuk kemampuan kepemimpinan dan manajemen operasional.</p>
+        </div>
+      </div>
+      <div class="summary-card fade-in">
+        <img src="https://ilhamdzulkhy.my.id/images/pic05.jpg" alt="Prestasi" class="sc-img" />
+        <div class="sc-body">
+          <h3>Prestasi</h3>
+          <div class="sc-sub" style="margin-bottom: 0.75rem;">Achievements and certifications obtained.</div>
+          <p style="color: var(--muted); font-size: 0.82rem; line-height: 1.65;">Pencapaian di tingkat nasional dan sertifikasi teknis yang membuktikan kompetensi di bidang IT dan sains.</p>
+        </div>
+      </div>
+      <div class="summary-card fade-in">
+        <img src="https://ilhamdzulkhy.my.id/images/pic06.jpg" alt="Proyek" class="sc-img" />
+        <div class="sc-body">
+          <h3>Proyek</h3>
+          <div class="sc-sub" style="margin-bottom: 0.75rem;">Projects undertaken.</div>
+          <p style="color: var(--muted); font-size: 0.82rem; line-height: 1.65;">Proyek-proyek teknis yang sedang dikerjakan, mulai dari web development, blockchain, hingga eksplorasi AI.</p>
+        </div>
+      </div>
+      <div class="summary-card fade-in">
+        <img src="https://ilhamdzulkhy.my.id/images/pic07.jpg" alt="Pengalaman" class="sc-img" />
+        <div class="sc-body">
+          <h3>Pengalaman</h3>
+          <div class="sc-sub" style="margin-bottom: 0.75rem;">Other experiences and activities undertaken.</div>
+          <p style="color: var(--muted); font-size: 0.82rem; line-height: 1.65;">Berbagai pengalaman bisnis digital, kepanitiaan, dan kegiatan lain yang membentuk karakter profesional.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-inner fade-in">
+      <div class="contact-left">
+        <div class="section-label">Contact</div>
+        <h2>Mari Terhubung 👋</h2>
+        <p style="margin-top: 0.75rem;">Let's connect or feel free to say hello through the links below. Saya terbuka untuk kolaborasi, diskusi teknologi, maupun peluang baru.</p>
+        <div class="contact-links">
+          <a href="mailto:dzulkhyilham@gmail.com" class="contact-link">
+            <div class="cl-icon fi-purple">📧</div>
+            <div>
+              <div class="cl-label">Email</div>
+              <div class="cl-val">dzulkhyilham@gmail.com</div>
+            </div>
+          </a>
+          <a href="https://linkedin.com/in/ilham-dzulkhy-643691406" target="_blank" class="contact-link">
+            <div class="cl-icon fi-blue">💼</div>
+            <div>
+              <div class="cl-label">LinkedIn</div>
+              <div class="cl-val">ilham-dzulkhy-643691406</div>
+            </div>
+          </a>
+          <a href="https://instagram.com/dzulkhy018" target="_blank" class="contact-link">
+            <div class="cl-icon fi-teal">📸</div>
+            <div>
+              <div class="cl-label">Instagram</div>
+              <div class="cl-val">@dzulkhy018</div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="contact-right">
+        <h3>Tech Interests</h3>
+        <div class="tech-stack">
+          <span class="tech-tag">Web Development</span>
+          <span class="tech-tag">Blockchain</span>
+          <span class="tech-tag">Solana</span>
+          <span class="tech-tag">AI / ML</span>
+          <span class="tech-tag">Smart City</span>
+          <span class="tech-tag">Cybersecurity</span>
+          <span class="tech-tag">Digital Business</span>
+          <span class="tech-tag">Hack The Box</span>
+        </div>
+        <h3>Highlights</h3>
+        <div class="stat-row">
+          <div class="stat-box">
+            <div class="stat-num">🏆</div>
+            <div class="stat-lbl">National Science Competition Winner</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-num">🎓</div>
+            <div class="stat-lbl">Telkom University Scholarship Recipient</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-num">⛓️</div>
+            <div class="stat-lbl">Solana Crypto Asset Creator</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-num">🛡️</div>
+            <div class="stat-lbl">Hack The Box Cyber Training</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  © 2026 Ilham Dzulkhy. All rights reserved. — Built with ❤️ from Telkom University
+</footer>
+
+<script>
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  document.querySelector('.fade-in').classList.add('visible');
+</script>
+</body>
+</html>
